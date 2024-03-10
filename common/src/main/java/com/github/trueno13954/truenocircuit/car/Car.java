@@ -8,6 +8,5 @@ import net.minecraft.world.level.Level;
 public class Car extends Boat {
     public Car(EntityType<? extends Boat> entityType, Level level) {
         super(entityType, level);
-        BoatRenderer
     }
 }
