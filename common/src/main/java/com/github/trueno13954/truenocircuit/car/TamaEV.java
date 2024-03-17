@@ -21,7 +21,8 @@ public class TamaEV<T extends Entity> extends EntityModel<T> {
 		this.bb_main = root.getChild("bb_main");
 	}
 
-	public static LayerDefinition createBodyLayer() {
+
+	public static LayerDefinition createBodyLayer(ModelLayerLocation layerLocation) {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
 
