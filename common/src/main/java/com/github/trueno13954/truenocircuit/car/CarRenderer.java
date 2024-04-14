@@ -2,12 +2,10 @@ package com.github.trueno13954.truenocircuit.car;
 
 import com.github.trueno13954.truenocircuit.TRUENOcircuit;
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.model.PandaModel;
-import net.minecraft.client.model.geom.ModelLayerLocation;
-import net.minecraft.client.model.geom.ModelLayers;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.entity.EntityRenderer;
-import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.*;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 
 public class CarRenderer extends EntityRenderer<Car> {
@@ -15,12 +13,14 @@ public class CarRenderer extends EntityRenderer<Car> {
 
     public CarRenderer(EntityRendererProvider.Context context) {
         super(context);
-        tamaEV = new TamaEV(context.bakeLayer(new ModelLayerLocation(new ResourceLocation(TRUENOcircuit.MOD_ID, "tamaev"), "main")));
+        tamaEV = new TamaEV(context.bakeLayer(TamaEV.LAYER_LOCATION));
     }
 
     @Override
     public void render(Car entity, float f, float g, PoseStack poseStack, MultiBufferSource multiBufferSource, int i) {
         poseStack.pushPose();
+        VertexConsumer consumer = multiBufferSource.getBuffer(tamaEV.renderType(new ResourceLocation(TRUENOcircuit.MOD_ID, "car")));
+        tamaEV.renderToBuffer(poseStack, consumer, i, OverlayTexture.NO_OVERLAY, 1,1,1,1);
         poseStack.popPose();
         super.render(entity, f, g, poseStack, multiBufferSource, i);
     }
